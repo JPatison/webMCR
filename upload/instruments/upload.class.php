@@ -240,8 +240,7 @@ private $downloads;
 	}
 }
 
-Class FileMenager extends Menager {
-private $style;
+Class FileMenager extends ObjectViewBase {
 private $work_skript;
 private $db;
 
@@ -249,10 +248,9 @@ private $db;
 	global $bd_names;	
 	
 		$this->db			= $bd_names['files'];	
-		$this->style		= (!$style)? MCR_STYLE : $style;		
 		$this->work_skript	= $work_skript;
 		
-		parent::Menager($this->style);		
+		parent::ObjectViewBase($style);		
 	}
 	
 	public function ShowAddForm(){		

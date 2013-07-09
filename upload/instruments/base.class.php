@@ -84,6 +84,19 @@ Class TextBase {
 	}	
 }
 
+Class Theme {
+	
+	const def_theme = 'Default/';	
+	
+	public static function Get($way, $base_ = false) {
+	global $config;
+	
+		$base = ($base_)? $base_ : '' ;	
+		
+		return MCR_STYLE.((file_exists(MCR_STYLE.$config['s_theme'].'/'.$base.$way))? $config['s_theme'].'/' : self::def_theme).$base.$way;
+	} 
+}
+
 Class EMail {
 const ENCODE = 'utf-8';
 	
@@ -221,22 +234,30 @@ Class Message {
 	
 }
 
-Class Menager {
-private $style;
+Class ObjectViewBase {
 
-	public function Menager($style = false) {
-	global $site_ways;
+	protected $st_subdir;
 	
-		$this->style = (!$style)? MCR_STYLE : $style;
+	public function ObjectViewBase($style_subdir = '') {
+	
+		if (!$style_subdir) $style_subdir = false;
+		
+		$this->st_subdir = $style_subdir;		
 		
 	}
-
-	public static function ShowStaticPage($page) {
+	
+	protected function styleWay($way) {
+		
+		return Theme::Get($way, $this->st_subdir);
+	
+	}
+	
+	public function ShowStaticPage($page) {
 	global $config;
 	
 		ob_start(); 
 		
-		include $page;
+		include self::styleWay($page);
 		
 		return ob_get_clean(); 	
 	}
@@ -382,14 +403,13 @@ private $db;
 	}
 }
 
-Class Menu {
+Class Menu extends ObjectViewBase {
 private $menu_items;
-private $style;
 
     public function Menu($style = false, $auto_load = true) {
 	global $config;
 	
-		$this->style = (!$style)? MCR_STYLE : $style;
+		parent::ObjectViewBase($style);
 		
 		if ($auto_load) {
 
@@ -430,7 +450,7 @@ private $style;
 		
 		$type = ($button_links)? 'menu_dropdown_item' : 'menu_item'; 
 
-		ob_start(); include ($this->style.$type.'.html');
+		ob_start(); include self::styleWay($type.'.html');
 		
 		return ob_get_clean();		
 	}
@@ -496,7 +516,7 @@ private $style;
 		
 		$menu_align = ($i == 1) ? 'pull-right' : 'pull-left';
 		
-		ob_start(); include ($this->style.'menu.html');
+		ob_start(); self::styleWay('menu.html');
 		
 		$html_menu .= ob_get_clean();
 		

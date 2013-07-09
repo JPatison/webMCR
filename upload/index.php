@@ -1,4 +1,6 @@
 <?php
+ $start_time = microtime(true);
+ $mem_use = memory_get_usage();
 header('Content-Type: text/html; charset=UTF-8');
 
 require_once('./system.php');
@@ -75,5 +77,5 @@ $content_servers = $servManager->Show('side');
 
 unset($servManager);
 
-include MCR_STYLE.'index.html';
+include Theme::Get('index.html');
 ?>

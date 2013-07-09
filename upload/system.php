@@ -1,5 +1,5 @@
 <?php
-// error_reporting(E_ALL);
+ error_reporting(E_ALL);
 
 define('MCR', 1);  
 define('MCR_ROOT', dirname(__FILE__).'/');
@@ -13,7 +13,7 @@ require(MCR_ROOT.'config.php');
 define('MCRAFT', MCR_ROOT.$site_ways['mcraft']);
 define('MCR_STYLE', './'.$site_ways['style']); // relative for current exec file
 
-define('STYLE_URL', $site_ways['style']);
+define('STYLE_URL', $site_ways['style'].$config['s_theme'].'/');
 define('BASE_URL', $config['s_root']);
 
 require(MCR_ROOT.'instruments/base.class.php');

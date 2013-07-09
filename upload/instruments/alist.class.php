@@ -1,16 +1,13 @@
 <?php
 if (!defined('MCR')) exit;
 
-Class ControlMenager extends Menager {
-var $style;
+Class ControlMenager extends ObjectViewBase {
 var $work_skript;
 var $category_id;
 
     function ControlMenager($style = false, $work_skript = '?mode=control') { 
-	
-		$this->style = (!$style)? MCR_STYLE : $style;
 		
-		parent::Menager($this->style);
+		parent::ObjectViewBase($style);
 		
 		$this->work_skript = $work_skript;	
 	}

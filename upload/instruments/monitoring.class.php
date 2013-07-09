@@ -414,13 +414,11 @@ private $rcon;
    }   
 }
 
-Class ServerMenager {
-private $style;
+Class ServerMenager extends ObjectViewBase {
 
 	public function ServerMenager($style = false) { 
-	global $site_ways;
 	
-	   $this->style = (!$style)? MCR_STYLE : $style;
+	   parent::ObjectViewBase($style);
 	}
 	
 	public function Show($type = 'side', $update = false) {
@@ -429,7 +427,7 @@ private $style;
 	         $page = self::getPageName($type);
         if (!$page) return false;
 		
-		$html_serv = Menager::ShowStaticPage($this->style.'serverstate_'.$type.'_header.html'); 
+		$html_serv = self::ShowStaticPage('serverstate_'.$type.'_header.html'); 
 		
 		$result = BD("SELECT `id` FROM `{$bd_names['servers']}` WHERE `$page`=1 ORDER BY priority DESC LIMIT 0,10"); 
 			
@@ -444,9 +442,9 @@ private $style;
 			unset($server);
 		   }
 		   
-		} else $html_serv .= Menager::ShowStaticPage($this->style.'serverstate_'.$type.'_empty.html');
+		} else $html_serv .= self::ShowStaticPage('serverstate_'.$type.'_empty.html');
 		
-		$html_serv .= Menager::ShowStaticPage($this->style.'serverstate_'.$type.'_footer.html');	
+		$html_serv .= self::ShowStaticPage('serverstate_'.$type.'_footer.html');	
 		
         return $html_serv;		
 	}	
