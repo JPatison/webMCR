@@ -1,4 +1,8 @@
-<?php if (!defined('MCR')) exit;
-$page = 'Карта'; $content_main = Menager::ShowStaticPage(STYLE_URL.'map.html');
+<?php 
+if (!defined('MCR')) exit;
+
+$page = 'Карта'; 
+$content_main = ObjectViewBase::ShowStaticPage(Theme::Get('map.html'));
+
 $menu->SetItemActive('map');
 ?>

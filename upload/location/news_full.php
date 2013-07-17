@@ -2,7 +2,7 @@
 if (!defined('FEEDBACK')) exit;
 
 $item_id = 0;
-$page    = 'Главная страница - Новости';	
+$page    = 'Главная страница — Новости';	
 
 if ( isset($_GET['id']) ) $item_id = (int) $_GET['id'];
 

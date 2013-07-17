@@ -334,6 +334,12 @@ a.news-link:active{
 
 }
 
+#antibot {
+  position: relative;
+  top: 5px;
+  width: 35px;
+}
+
 /* блок */
 
 .footer-block {

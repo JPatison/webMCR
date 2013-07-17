@@ -5,6 +5,8 @@ Class ControlMenager extends ObjectViewBase {
 var $work_skript;
 var $category_id;
 
+private $prefix = 'admin/';
+
     function ControlMenager($style = false, $work_skript = '?mode=control') { 
 		
 		parent::ObjectViewBase($style);
@@ -13,7 +15,7 @@ var $category_id;
 	}
 
 	function ShowUserListing($list = 1, $search_by = 'name', $input = false) {
-	global $bd_users,$bd_names;
+	global $bd_users, $bd_names, $prefix;
 
 		$input = TextBase::SQLSafe($input);
 	
@@ -35,9 +37,9 @@ var $category_id;
 		ob_start(); 		
 
 	          $resnum =  mysql_num_rows( $result );	
-	    if ( !$resnum ) { include $this->style.'admin/user_not_found.html'; return ob_get_clean(); }  
+	    if ( !$resnum ) { include Theme::Get('user_not_found.html', $prefix); return ob_get_clean(); }  
 		
-        include $this->style.'admin/user_find_header.html'; 
+        include Theme::Get('user_find_header.html', $prefix); 
   
 		while ( $line = mysql_fetch_array( $result, MYSQL_NUM ) ) {
 		
@@ -51,10 +53,10 @@ var $category_id;
 			
             unset($inf_user);
 			
-            include $this->style.'admin/user_find_string.html'; 
+            include Theme::Get('user_find_string.html', $prefix); 
         } 
 		
-		include $this->style.'admin/user_find_footer.html'; 
+		include Theme::Get('user_find_footer.html', $prefix); 
 
         $html = ob_get_clean();
 
@@ -70,20 +72,20 @@ var $category_id;
 	}
 	
     function ShowServers($list) { 
-    global $bd_names;
+    global $bd_names, $prefix;
 
     ob_start(); 	
 	
-    include $this->style.'admin/servers_caption.html';
+    include Theme::Get('servers_caption.html', $prefix);
 	
 	// TODO increase priority by votes
 	
     $result = BD("SELECT * FROM `{$bd_names['servers']}` ORDER BY priority DESC LIMIT ".(10*($list-1)).",10");  
     $resnum = mysql_num_rows( $result );
 	
-	if ( !$resnum ) { include $this->style.'admin/servers_not_found.html'; return ob_get_clean(); }  
+	if ( !$resnum ) { include Theme::Get('servers_not_found.html', $prefix); return ob_get_clean(); }  
 		
-	include $this->style.'admin/servers_header.html'; 
+	include Theme::Get('servers_header.html', $prefix); 
 		
 		while ( $line = mysql_fetch_array( $result ) ) {
 		
@@ -100,10 +102,10 @@ var $category_id;
 			}			
 			$server_id       = $line['id'];
 		
-		include $this->style.'admin/servers_string.html';         
+		include Theme::Get('servers_string.html', $prefix);         
         }
         
-	include $this->style.'admin/servers_footer.html'; 
+	include Theme::Get('servers_footer.html', $prefix); 
 	$html = ob_get_clean();
 	
 		$result = BD("SELECT COUNT(*) FROM `{$bd_names['servers']}`");
@@ -116,20 +118,20 @@ var $category_id;
     }
 	
     function ShowIpBans($list) {
-    global $bd_names;
+    global $bd_names, $prefix;
 
     RefreshBans();
 
     ob_start(); 	
 	
-    include $this->style.'admin/ban_ip_caption.html';
+    include Theme::Get('ban_ip_caption.html', $prefix);
 	
     $result = BD("SELECT * FROM `{$bd_names['ip_banning']}` ORDER BY ban_until DESC LIMIT ".(10*($list-1)).",10");  
     $resnum = mysql_num_rows( $result );
 	
-	if ( !$resnum ) { include $this->style.'admin/ban_ip_not_found.html'; return ob_get_clean(); }  
+	if ( !$resnum ) { include Theme::Get('ban_ip_not_found.html', $prefix); return ob_get_clean(); }  
 		
-	include $this->style.'admin/ban_ip_header.html'; 
+	include Theme::Get('ban_ip_header.html', $prefix); 
 		
 		while ( $line = mysql_fetch_array( $result ) ) {
 		
@@ -139,11 +141,11 @@ var $category_id;
 			 $ban_type  = $line['ban_type'];
 			 $ban_reason  = $line['reason'];			 
 			 
-		     include $this->style.'admin/ban_ip_string.html'; 
+		     include Theme::Get('ban_ip_string.html', $prefix); 
         
         }
         
-	include $this->style.'admin/ban_ip_footer.html'; 
+	include Theme::Get('ban_ip_footer.html', $prefix); 
 	$html = ob_get_clean();
 	
 		$result = BD("SELECT COUNT(*) FROM `{$bd_names['ip_banning']}`");

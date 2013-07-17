@@ -8,7 +8,7 @@ ob_start();
 if (!empty($user)) {
   
    if ($mode == 'control') 
-   include Theme::Get('admin/side.html');  
+   include Theme::Get('side.html', 'admin/');  
    include Theme::Get('mineprofil.html');    
 	
 } else {

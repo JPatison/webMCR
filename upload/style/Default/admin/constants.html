@@ -6,7 +6,8 @@
 	
 		<li class="active"><a href="#tab1" data-toggle="tab">Основные настройки</a></li>
 		<li><a href="#tab2" data-toggle="tab">Почтовый сервер</a></li>
-		<li><a href="#tab3" data-toggle="tab">Дополнительно</a></li>		
+		<li><a href="#tab3" data-toggle="tab">Темы</a></li>
+		<li><a href="#tab4" data-toggle="tab">Дополнительно</a></li>		
     </ul>
 	
     <div class="tab-content">
@@ -72,7 +73,13 @@
 			
 		</div>
 		
-		<div class="tab-pane" id="tab3">
+		<div class="tab-pane" id="tab3">	  
+
+<?php Theme::OutputOnPage(); ?>
+
+		</div><br>
+
+		<div class="tab-pane" id="tab4">
 	
 			<label class="checkbox">
 			  <input type="checkbox" name="site_offline" value="1" <?php echo ($config['offline'])?'checked="checked"':'' ?>> Закрыть сайт ( режим "Технических работ" )

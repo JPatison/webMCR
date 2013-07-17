@@ -12,8 +12,8 @@
     <meta name="description" content="<?php echo $config['s_about'] ?>">
     <meta name="author" content="NC22"><!-- first version of stylesheet was developed by KillerProst -->
 
-    <link href="<?php echo STYLE_URL ?>css/style.css" rel="stylesheet">
-	<link href="<?php echo STYLE_URL ?>css/serverbar.css" rel="stylesheet">
+    <link href="<?php echo Theme::Get('style.css', 'css/') ?>" rel="stylesheet">
+	<link href="<?php echo Theme::Get('serverbar.css', 'css/') ?>" rel="stylesheet">
 	
 	<?php echo $content_js ?>
 	
@@ -23,11 +23,11 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="<?php echo STYLE_URL ?>ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo STYLE_URL ?>ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo STYLE_URL ?>ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo STYLE_URL ?>ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="<?php echo STYLE_URL ?>ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="<?php echo Theme::Get('favicon.ico', 'ico/') ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo Theme::Get('apple-touch-icon-144-precomposed.png', 'ico/') ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo Theme::Get('apple-touch-icon-114-precomposed.png', 'ico/') ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo Theme::Get('apple-touch-icon-72-precomposed.png', 'ico/') ?>">
+    <link rel="apple-touch-icon-precomposed" href="<?php echo Theme::Get('apple-touch-icon-57-precomposed.png', 'ico/') ?>">
 	
 </head>
 
@@ -84,7 +84,7 @@ pbm.Live(100,100)
 
 	<div class="skin-block" >
 	  <div id="customp-skin-front" style="display:inline-block; height: 224px; width: 112px;">
-	     <img id="customp-female" class="female" style="position: relative; display: none;" src="<?php echo STYLE_URL ?>img/ribbon.png" alt="Девочка"/>
+	     <img id="customp-female" class="female" style="position: relative; display: none;" src="<?php echo Theme::Get('ribbon.png', 'img/') ?>" alt="Девочка"/>
 	  </div>	  
     </div>   
 
@@ -178,13 +178,13 @@ pbm.Live(100,100)
 			
     </footer>
 	
-	<script src="<?php echo STYLE_URL ?>js/jquery.js"></script>
-	<script src="<?php echo STYLE_URL ?>js/smiles.js"></script>	
-	<script src="<?php echo STYLE_URL ?>js/tools.js"></script>
+	<script src="<?php echo Theme::Get('jquery.js', 'js/') ?>">       </script>
+	<script src="<?php echo Theme::Get('smiles.js', 'js/') ?>">       </script>	
+	<script src="<?php echo Theme::Get('tools.js', 'js/') ?>">        </script>
 	
-	<script src="<?php echo STYLE_URL ?>js/monitoring.js"></script>
-	<script src="<?php echo STYLE_URL ?>js/ajax.js"></script>
+	<script src="<?php echo Theme::Get('monitoring.js', 'js/') ?>">   </script>
+	<script src="<?php echo Theme::Get('ajax.js', 'js/') ?>">         </script>
 	
-	<script src="<?php echo STYLE_URL ?>js/bootstrap.min.js"></script>
+	<script src="<?php echo Theme::Get('bootstrap.min.js', 'js/') ?>"></script>
   </body>
 </html>

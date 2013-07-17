@@ -18,12 +18,14 @@ private $size;
 private $hash;
 private $downloads;
 
+private $prefix = 'other/';
+
 	public function File($id = false, $style = false) {
 	global $bd_names;	
 		
 		$this->base_dir	= MCRAFT.'userdata/';
 		$this->db    	= $bd_names['files'];		
-		$this->style 	= (!$style)? MCR_STYLE : $style;
+		$this->style 	= (!$style) ? MCR_STYLE : $style;
 		$this->formats  = array('jpg', 'jpeg', 'gif', 'png', 'zip', 'rar', 'exe', 'jar', 'doc', 'pdf', 'txt');
 		
 		$this->id		= false;
@@ -204,7 +206,7 @@ private $downloads;
 	}	
 	
 	public function Show() {
-	global $config;
+	global $config, $prefix;
 	
 	if (!$this->Exist()) return '';
 	
@@ -223,7 +225,7 @@ private $downloads;
 		
 		$file_link	= 'http://'.$_SERVER['SERVER_NAME'].BASE_URL.(($config['rewrite'])? 'get/' : 'action.php?method=download&file=').$file_link_id;
 		
-		ob_start(); include $this->style.'other/file.html';
+		ob_start(); include Theme::Get('file.html', $prefix);
 		
 	return ob_get_clean();
 	}
@@ -244,6 +246,8 @@ Class FileMenager extends ObjectViewBase {
 private $work_skript;
 private $db;
 
+private $prefix = 'other/';
+
     public function FileMenager($style = false, $work_skript = 'index.php?mode=control&do=filelist&') {
 	global $bd_names;	
 	
@@ -253,12 +257,13 @@ private $db;
 		parent::ObjectViewBase($style);		
 	}
 	
-	public function ShowAddForm(){		
-		return Menager::ShowStaticPage($this->style.'other/file_add.html');
+	public function ShowAddForm(){
+	global $prefix;		
+		return ObjectViewBase::ShowStaticPage('file_add.html', $prefix);
 	}
 	
 	public function ShowFilesByUser($list = 1, $user_id = false) {
-			
+	global $prefix;		
 			$list = (int) $list;	
 		if ($list <= 0) $list = 1; 
 		
@@ -270,11 +275,11 @@ private $db;
 			  
 		$num = $line[0];	
 		
-		$html_files = Menager::ShowStaticPage($this->style.'other/files_header.html');
+		$html_files = ObjectViewBase::ShowStaticPage('files_header.html', $prefix);
 		
 		if (!$num) {
 		
-		$html_files .= Menager::ShowStaticPage($this->style.'other/files_empty.html');	
+		$html_files .= ObjectViewBase::ShowStaticPage('files_empty.html', $prefix);	
 		return $html_files;
 		}
 		

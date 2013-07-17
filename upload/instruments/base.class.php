@@ -84,19 +84,6 @@ Class TextBase {
 	}	
 }
 
-Class Theme {
-	
-	const def_theme = 'Default/';	
-	
-	public static function Get($way, $base_ = false) {
-	global $config;
-	
-		$base = ($base_)? $base_ : '' ;	
-		
-		return MCR_STYLE.((file_exists(MCR_STYLE.$config['s_theme'].'/'.$base.$way))? $config['s_theme'].'/' : self::def_theme).$base.$way;
-	} 
-}
-
 Class EMail {
 const ENCODE = 'utf-8';
 	
@@ -233,6 +220,37 @@ Class Message {
 	}
 	
 }
+// TODO: Починить смайлы
+//                меню
+//                установку
+//                комментарии
+//                файлы
+Class Theme {
+	
+	const def_theme = 'Default/';	
+	
+	public static function Get($way, $base_ = false) {
+	global $config;
+	
+		$base = ($base_) ? $base_ : '' ;	
+		
+		return MCR_STYLE.((file_exists(MCR_STYLE.$config['s_theme'].'/'.$base.$way)) ? $config['s_theme'].'/' : self::def_theme).$base.$way;
+	} 
+
+	public function OutputOnPage() {
+
+		if ($themes_dir = opendir(MCR_STYLE)) {    
+
+			while (false !== ($theme = readdir($themes_dir))) {  
+				echo '<label class="t-block"> <img src="'.MCR_STYLE.$theme.'/theme_img.png"> <input type="radio" name="site_theme" value="'.$theme.'/"> '.$theme.' </label>';
+			}
+			
+		   closedir($themes_dir);  
+		}
+
+	}
+	
+}
 
 Class ObjectViewBase {
 
@@ -247,8 +265,8 @@ Class ObjectViewBase {
 	}
 	
 	protected function styleWay($way) {
-		
-		return Theme::Get($way, $this->st_subdir);
+
+		return (empty($this)) ? Theme::Get($way) : Theme::Get($way, $this->st_subdir);
 	
 	}
 	
@@ -260,6 +278,7 @@ Class ObjectViewBase {
 		include self::styleWay($page);
 		
 		return ob_get_clean(); 	
+		
 	}
 
     public function arrowsGenerator($link, $curpage, $itemsnum, $per_page, $prefix = 'news') { 
