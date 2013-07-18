@@ -1,4 +1,8 @@
-<?php if (!defined('MCR')) exit;
-$page = 'Как начать играть'; $content_main = Menager::ShowStaticPage(STYLE_URL.'guide.html');
+<?php 
+if (!defined('MCR')) exit;
+
+$page = 'Как начать играть'; 
+$content_main = ObjectViewBase::ShowStaticPage('guide.html');
+
 $menu->SetItemActive('guide');
 ?>

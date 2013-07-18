@@ -156,7 +156,7 @@ switch ($method) {
 			
 	    require_once(MCR_ROOT.'instruments/catalog.class.php');
 				
-		$comments_item = new Comments_Item(false, MCR_STYLE.'news/');				
+		$comments_item = new Comments_Item(false, Theme::Get('', 'news/'));				
 		$rcode = $comments_item->Create($_POST['comment'],(int)$_POST['item_id']);
         
             if ( $rcode == 1701 ) aExit(1, lng('MESS_SHORT'));       
@@ -340,7 +340,7 @@ switch ($method) {
         if ($mod_user->defaultSkinTrigger())         $ajax_message['skin']  = 1; 
 
         	if ($message) aExit(2, $message  ); // some bad news 
-		elseif (!$rnum)  aExit(100, $message ); //nothing changed
+		elseif (!$rnum)  aExit(100, $message ); // nothing changed
         else aExit(0, lng('PROFILE_COMPLITE'));  
 
     break;

@@ -26,5 +26,5 @@ $servManager = new ServerMenager();
 $server_state_html = $servManager->Show('game');
 unset($servManager);
 			  
-include_once MCR_STYLE.'index.html';
+include_once MCR_STYLE.Theme::def_theme.'index.html';
 ?>

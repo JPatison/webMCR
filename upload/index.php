@@ -9,7 +9,7 @@ BDConnect('index');
 require(MCR_ROOT.'instruments/user.class.php');
 MCRAuth::userLoad();
 
-function GetRandomAdvice() { return ($quotes = @file(MCR_STYLE.'sovet.txt'))? $quotes[rand(0, sizeof($quotes)-1)] : "Советов нет"; }
+function GetRandomAdvice() { return ($quotes = @file(MCR_STYLE.'Default/sovet.txt'))? $quotes[rand(0, sizeof($quotes)-1)] : "Советов нет"; }
 
 function LoadTinyMCE() {
 global $addition_events, $content_js;
@@ -31,7 +31,7 @@ global $addition_events, $content_js;
 
 $menu = new Menu();
 
-if ($config['offline'] and (empty($user) or $user->group() != 3)) exit(Menager::ShowStaticPage(MCR_STYLE.'site_closed.html'));
+if ($config['offline'] and (empty($user) or $user->group() != 3)) exit(ObjectViewBase::ShowStaticPage('site_closed.html'));
 
 if (!empty($user)) {
 
@@ -54,8 +54,8 @@ elseif (isset($_POST['mode'])) $mode = $_POST['mode'];
 if ($mode == 'side') $mode = $config['s_dpage'];
 
 switch ($mode) {
-    case 'start': $page = 'Начать игру'; $content_main = Menager::ShowStaticPage(MCR_STYLE.'start-game.html');  break;
-	case '404':   $page = 'Страница не найдена'; $content_main = Menager::ShowStaticPage(MCR_STYLE.'404.html'); break;
+    case 'start': $page = 'Начать игру'; $content_main = ObjectViewBase::ShowStaticPage('start-game.html');  break;
+	case '404':   $page = 'Страница не найдена'; $content_main = ObjectViewBase::ShowStaticPage('404.html'); break;
 	case 'register': 
 	case 'news':	  include('./location/news.php');		break;
 	case 'news_full': include('./location/news_full.php');	break;

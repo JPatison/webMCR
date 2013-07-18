@@ -6,7 +6,9 @@ if (!defined('MCR')) exit;
  - Менеджер каталогизатора новостей
  - Новость
  - Комментарий
- - Категории новостей */
+ - Категории новостей 
+
+*/
 
 Class Category {
 private $db;
@@ -206,7 +208,9 @@ private $user_id;
 	}
 	
 	public function Show() {
-	global $user, $bd_users;
+	global $user,$bd_users;
+
+	$prefix = 'news/';
 	
 		if (!$this->Exist()) return self::ShowStaticPage('comment_not_found.html');
 			
@@ -239,15 +243,15 @@ private $user_id;
 			
 		if ( !empty($user) and ( $user->getPermission('adm_comm') or $user->id() == $user_id ) ) { 
 
-			ob_start(); include self::styleWay('comments_admin.html');			  
+			ob_start(); include Theme::Get('comments_admin.html', $prefix);			  
 			$admin_buttons = ob_get_clean();
 		}
 
 		if ( $user_female ) $female_mark = self::ShowStaticPage('comments_girl.html');
 		
 		ob_start();	
-		if ( !empty($user) ) include self::styleWay('comments.html');
-		else 	             include self::styleWay('comments_unauth.html');
+		if ( !empty($user) ) include Theme::Get('comments.html', $prefix);
+		else 	             include Theme::Get('comments_unauth.html', $prefix);
 	 
 	return ob_get_clean();		
 	}

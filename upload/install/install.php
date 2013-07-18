@@ -54,7 +54,7 @@ include MCR_ROOT.'instruments/timezones.php';
 $page = 'Настройка '.PROGNAME;
 $content_advice = 'Заполните форму для завершения установки '.PROGNAME;
 $content_servers = ''; $content_js = '';
-$content_side = Menager::ShowStaticPage('./style/install_side.html');
+$content_side = Theme::Get('./style/install_side.html');
 
 $addition_events = '';
 $info = '';  $cErr = '';
@@ -353,4 +353,7 @@ switch ($step) {
 $content_main = ob_get_clean();
 
 include_once MCR_STYLE.'index.html';
+
+// TODO: Починить установку
+
 ?>

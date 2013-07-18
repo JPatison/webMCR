@@ -24,7 +24,7 @@ private $rcon;
 	global $bd_names;
 	
 		$this->db    = $bd_names['servers'];
-		$this->style = (!$style)? MCR_STYLE : $style;
+		$this->style = (!$style) ? MCR_STYLE : $style;
 		
 	    $this->id = (int)$id; if (!$this->id) return false;
 		
@@ -326,11 +326,11 @@ private $rcon;
 				
     	switch ($type) {		
 		case 'mon':            
-		case 'side': include $this->style.'serverstate_'.$type.'.html';	break;
+		case 'side': include Theme::Get('serverstate_'.$type.'.html');	break;
 		case 'game':
 		
-		if ( $this->online ) include $this->style.'serverstate_'.$type.'_online.html';  
-		else include $this->style.'serverstate_'.$type.'_offline.html';	
+		if ( $this->online ) include Theme::Get('serverstate_'.$type.'_online.html');  
+		else include Theme::Get('serverstate_'.$type.'_offline.html');	
 		
         break;		
 		default: return false; break;
@@ -435,7 +435,7 @@ Class ServerMenager extends ObjectViewBase {
 
 		   while ( $line = mysql_fetch_array( $result, MYSQL_NUM ) ) {
 					
-			$server = new Server($line[0],$this->style);
+			$server = new Server($line[0],STYLE_URL);
 			if ($update) $server->UpdateState();
             $html_serv .= $server->ShowHolder($type);
 			

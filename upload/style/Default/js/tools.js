@@ -265,6 +265,11 @@ function getClientW() {
 function getClientH() {
   return document.compatMode=='CSS1Compat' && document.documentElement.clientHeight;
 }
+// TODO: Поддержка классов и тегов (например, input[type=""])
+function BanLettersInForm(id) {
+  var obj = $('#' + id);
+  obj.bind('keyup', function(){ this.value = this.value.replace (/[A-Za-z-А-Яа-я]/, ''); });	
+}
 
 /* Date Time */
 
